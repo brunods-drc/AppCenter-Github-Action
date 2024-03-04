@@ -2,7 +2,12 @@ name: Sample workflow for App Center action
 on: [push, pull_request, workflow_dispatch]
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -47,4 +52,3 @@ jobs:
           group: Collaborators
           file: ApiDemos-debug.apk
           debug: true
-
